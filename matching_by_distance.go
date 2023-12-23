@@ -23,5 +23,13 @@ var RandFunc = &functions.Overload{
 	decls.NewOverload("min_double_int",
 		[]*exprpb.Type{decls.Double, decls.Int},
 		decls.Double),
+
+	Binary: func(lhs, rhs ref.Val) ref.Val {
+		lftInt64 := float64(lhs.Value().(int64))
+		rgtInt64 := rhs.Value().(float64)
+		if lftInt64 < rgtInt64 {
+			return types.Double(rgtInt64)
+		}
+		return types.Double(lftInt64)
 	},
 }
